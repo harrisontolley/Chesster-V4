@@ -11,10 +11,18 @@ def get_best_move(fen):
         data = response.json()
         if "moves" in data and data["moves"]:
             best_move_uci = data["moves"][0]["uci"]
-            return best_move_uci
+            category = data.get('category', 'unknown')
+            # Determine evaluation based on category
+            if category == 'win':
+                evaluation = 100000  # High positive value
+            elif category == 'loss':
+                evaluation = -100000  # High negative value
+            else:
+                evaluation = 0  # Draw
+            return best_move_uci, evaluation
         else:
             print("No moves available or not a tablebase position.")
-            return None
+            return None, 0
     else:
-        print("Error:", response.status_code)
-        return None
+        print(f"Error querying tablebase: {response.status_code}")
+        return None, 0
