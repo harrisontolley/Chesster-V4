@@ -8,3 +8,10 @@ pip install -r requirements.txt
 python3 server.py
 ```
 
+Navigate to [ChessterWeb](https://github.com/harrisontolley/ChessterWeb), and clone the repository. 
+
+Then start the local ChessterWeb app using:
+```bash
+npm install
+npm run dev
+```
